@@ -1,0 +1,9 @@
+{% for r in routers %}
+INSERT INTO routers (router_id, certificate, public_key, expiration)
+VALUES ( "{{ r.router_id }}", "{{ r.certificate }}", "{{ r.public_key }}", "{{ r.expiration }}" );
+{% endfor %}
+
+{% for p in prefixes %}
+INSERT INTO prefixes (router_id, prefix)
+VALUES ( "{{ p.router_id }}", "{{ p.prefix }}" );
+{% endfor %}
