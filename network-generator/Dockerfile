@@ -4,7 +4,8 @@ RUN apt update
 
 RUN pip install \
     networkx \
-    matplotlib
+    matplotlib \
+    pyyaml 
 RUN mkdir /root/artifacts
 
 COPY ./src /root/src
