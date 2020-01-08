@@ -10,9 +10,21 @@ This tool can generates some kinds network.
 - tree grpah
 
 ## Usage
+
+Build docker image.
+
 ```sh
 $ docker build netgen -t .
-# Generates path graph (5 nodes, docker image 'hoge')
+```
+
+Generates a path graph. (five nodes, hoge images)
+
+```sh
 $ docker run  -v $PWD:/root/artifacts netgen path -n 5 -i hoge
 ```
 
+You can generate graph with some images at same time.
+
+```sh
+$ docker run  -v $PWD:/root/artifacts netgen random -n 5 -i hoge,foo,bar
+```
