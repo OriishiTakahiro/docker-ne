@@ -3255,6 +3255,7 @@ accept	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/openssl-0.
 accept	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/openssl-0.10.23/src/ssl/mod.rs	/^    pub fn accept<S>(self, stream: S) -> Result<SslStream<S>, HandshakeError<S>>$/;"	P	implementation:Ssl
 acquire_privileges	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/time-0.1.42/src/sys.rs	/^    fn acquire_privileges() {$/;"	f	module:inner
 activate	/home/takahiro/WorkSpace/docker-ne/network-runner/src/lib.rs	/^pub mod activate;$/;"	n
+activate_network	/home/takahiro/WorkSpace/docker-ne/network-runner/src/activate.rs	/^pub fn activate_network(nodes: Nodes, args: &ArgMatches) -> Result<Nodes, String>{$/;"	f
 active_session	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/openssl-0.10.23/src/ssl/test/mod.rs	/^fn active_session() {$/;"	f
 actix_web	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/askama-0.8.0/src/lib.rs	/^pub mod actix_web {$/;"	n
 adaptors	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/itertools-0.8.0/src/lib.rs	/^mod adaptors;$/;"	n
@@ -3497,7 +3498,6 @@ asn1	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/openssl-sys-
 assert_equal	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/itertools-0.8.0/src/lib.rs	/^pub fn assert_equal<I, J>(a: I, b: J)$/;"	f
 at	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/time-0.1.42/src/lib.rs	/^pub fn at(clock: Timespec) -> Tm {$/;"	f
 at_utc	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/time-0.1.42/src/lib.rs	/^pub fn at_utc(clock: Timespec) -> Tm {$/;"	f
-atcivate_network	/home/takahiro/WorkSpace/docker-ne/network-runner/src/activate.rs	/^pub fn atcivate_network(nodes: Nodes) -> Result<Nodes, String>{$/;"	f
 attr_type	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/x509-parser-0.4.2/src/x509.rs	/^    pub attr_type: Oid,$/;"	m	struct:AttributeTypeAndValue
 attr_value	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/x509-parser-0.4.2/src/x509.rs	/^    pub attr_value: DerObject<'a>, \/\/ XXX DirectoryString ?$/;"	m	struct:AttributeTypeAndValue
 author	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.0/src/app/meta.rs	/^    pub author: Option<&'b str>,$/;"	m	struct:AppMeta
@@ -4025,7 +4025,7 @@ de	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_yaml-0.8
 de	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_yaml-0.8.9/src/lib.rs	/^mod de;$/;"	n
 de	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_yaml-0.8.9/src/value/mod.rs	/^mod de;$/;"	n
 deactivate	/home/takahiro/WorkSpace/docker-ne/network-runner/src/lib.rs	/^pub mod deactivate;$/;"	n
-deatcivate_network	/home/takahiro/WorkSpace/docker-ne/network-runner/src/deactivate.rs	/^pub fn deatcivate_network(nodes: Nodes) {$/;"	f
+deactivate_network	/home/takahiro/WorkSpace/docker-ne/network-runner/src/deactivate.rs	/^pub fn deactivate_network(nodes: Nodes) {$/;"	f
 debug	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.0/src/macros.rs	/^    macro_rules! debug {$/;"	M	module:debug_macros
 debug_asserts	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.0/src/app/parser.rs	/^    fn debug_asserts(&self, a: &Arg) -> bool {$/;"	f
 debug_fmt_fields	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/itertools-0.8.0/src/impl_macros.rs	/^macro_rules! debug_fmt_fields {$/;"	M

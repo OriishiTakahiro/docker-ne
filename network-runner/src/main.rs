@@ -12,8 +12,8 @@ use clap::{ App, Arg, SubCommand };
 // use original modules
 use network_runner::consts::{ NETWORK_STATE_FILE };
 use network_runner::node::Nodes;
-use network_runner::activate::atcivate_network;
-use network_runner::deactivate::deatcivate_network;
+use network_runner::activate::activate_network;
+use network_runner::deactivate::deactivate_network;
 use network_runner::switch;
 
 fn main() {
@@ -29,6 +29,22 @@ fn main() {
                         Arg::with_name("file")
                         .help("Yaml file witch is specified network structure.")
                         .required(true)
+                    )
+                    .arg(
+                        Arg::with_name("fhost")
+                        .long("fhost")
+                        .short("h")
+                        .help("Hostname of fluentd.")
+                        .takes_value(true)
+                        .required(false)
+                    )
+                    .arg(
+                        Arg::with_name("fport")
+                        .long("fport")
+                        .short("p")
+                        .help("Port number of fluentd.")
+                        .takes_value(true)
+                        .required(false)
                     )
                  )
                 .subcommand(
@@ -121,18 +137,18 @@ fn main() {
     // run subcommand
     if let Some(ref run_matches) = matches.subcommand_matches("run") {
         if let Some(file) = run_matches.value_of("file") {
-           let nodes = match read_network_yaml(file.to_string()) {
+            let nodes = match read_network_yaml(file.to_string()) {
                Ok(result) => result,
                Err(msg) => panic!(msg),
-           };
-           let nodes = match atcivate_network(nodes) {
+            };
+            let nodes = match activate_network(nodes, run_matches) {
                 Ok(nodes) => (nodes),
                 Err(msg) => panic!(msg),
-           };
-           match write_network_yaml(NETWORK_STATE_FILE.to_string(), nodes, false) {
+            };
+            match write_network_yaml(NETWORK_STATE_FILE.to_string(), nodes, false) {
                 Ok(_) => (),
                 Err(msg) => panic!(msg),
-           };
+            };
         }
         std::process::exit(0);
     }
@@ -144,7 +160,7 @@ fn main() {
                Ok(result) => result,
                Err(msg) => panic!(msg),
             };
-            deatcivate_network(nodes);
+            deactivate_network(nodes);
         } else {
             eprintln!("No network are running now.")
         }

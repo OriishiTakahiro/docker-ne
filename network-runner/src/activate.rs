@@ -4,9 +4,12 @@ extern crate openssl;
 use std::fs;
 use std::process::Command;
 use std::collections::HashMap;
+use std::path::Path;
 
 use openssl::x509::X509;
 use askama::Template;
+
+use clap::{ ArgMatches };
 
 // use original modules
 use crate::node::*;
@@ -14,7 +17,11 @@ use crate::consts::*;
 use crate::utils::*;
 use crate::cert::*;
 
-pub fn atcivate_network(nodes: Nodes) -> Result<Nodes, String>{
+pub fn activate_network(nodes: Nodes, args: &ArgMatches) -> Result<Nodes, String>{
+
+    let fluent_host = args.value_of("fhost").unwrap_or(DEFAULT_FLUENTD_HOST);
+    let fluent_port = args.value_of("fport").unwrap_or(DEFAULT_FLUENTD_PORT);
+    let network_name = Path::new( args.value_of("file").unwrap_or(DEFAULT_NETWORK_NAME) ).file_stem().unwrap().to_str().unwrap();
 
     // remove all conf file
     match fs::remove_dir_all( TMP_DIR ) {
@@ -136,8 +143,10 @@ pub fn atcivate_network(nodes: Nodes) -> Result<Nodes, String>{
                 "-e",
                 &format!("OSPF6D_OPTS={}", if n.is_ca() {"-c"} else {"''"}),
                 "--log-driver=fluentd",
-                "--log-opt", "fluentd-address=localhost:24224",
-                "--log-opt", "tag=docker.{{.Name}}",
+                "--log-opt",
+                &format!("fluentd-address={}:{}", fluent_host, fluent_port),
+                "--log-opt", 
+                &format!("tag=docker.{}.{}", network_name, "{{.Name}}"),
                 n.image(),
             ]).output();
 

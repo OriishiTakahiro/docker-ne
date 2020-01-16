@@ -5,7 +5,7 @@ use std::process::Command;
 use crate::node::{ Nodes, switch_set };
 use crate::consts::TMP_DIR;
 
-pub fn deatcivate_network(nodes: Nodes) {
+pub fn deactivate_network(nodes: Nodes) {
 
     // remove all conf file
     match fs::remove_dir_all( TMP_DIR ) {

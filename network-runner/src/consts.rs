@@ -1,3 +1,7 @@
+pub const DEFAULT_FLUENTD_HOST: &str    = "localhost";
+pub const DEFAULT_FLUENTD_PORT: &str    = "24224";
+pub const DEFAULT_NETWORK_NAME: &str    = "default";
+
 // ------------- For temporary files --------------- //
 
 pub const NETWORK_STATE_FILE: &str = "/tmp/network_runner/network_state.yml";
