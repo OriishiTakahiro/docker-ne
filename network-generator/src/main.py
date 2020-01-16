@@ -17,7 +17,10 @@ ARTIFACT_PATH   = "/root/artifacts"
 
 # handler functions for create a graph
 def create_random_graph(args):
-    return nx.fast_gnp_random_graph(args.nodes, args.proverbility)
+    graph = nx.fast_gnp_random_graph(args.nodes, args.proverbility)
+    while(not nx.is_connected(graph)):
+        graph = nx.fast_gnp_random_graph(args.nodes, args.proverbility)
+    return graph
 
 def create_full_mesh_graph(args):
     return nx.fast_gnp_random_graph(args.nodes, 1)

@@ -1,2 +1,4 @@
+!.gitkeep
 *.png
-*.yml
+*.svg
+*.yaml
