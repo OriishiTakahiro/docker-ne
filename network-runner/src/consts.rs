@@ -29,6 +29,9 @@ pub const CA_CERT: &'static str = "ca_cert.pem";
 // Private key and Certificate
 pub const SEED_DATA: &'static str = "insert_seed.sql";
 
+// Test script with ping
+pub const TEST_PING_SCRIPT: &'static str = "test_ping";
+
 // parameters for credentials
 pub const KEY_SIZE: u32 = 2048;
 pub const CERT_EXPIRATION: u32 = 3650;

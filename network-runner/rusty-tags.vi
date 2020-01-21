@@ -1967,6 +1967,8 @@ PhantomData	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/serde
 PhantomData	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/serde-1.0.92/src/ser/impls.rs	/^impl<T: ?Sized> Serialize for PhantomData<T> {$/;"	c
 PhantomDataVisitor	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/serde-1.0.92/src/de/impls.rs	/^impl<'de, T: ?Sized> Visitor<'de> for PhantomDataVisitor<T> {$/;"	c
 PhantomDataVisitor	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/serde-1.0.92/src/de/impls.rs	/^struct PhantomDataVisitor<T: ?Sized> {$/;"	s
+PingTarget	/home/takahiro/WorkSpace/docker-ne/network-runner/src/cert.rs	/^impl PingTarget {$/;"	c
+PingTarget	/home/takahiro/WorkSpace/docker-ne/network-runner/src/cert.rs	/^struct PingTarget {$/;"	s
 Pkcs	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/x509-parser-0.4.2/src/objects.rs	/^    Pkcs,$/;"	e	enum:Nid
 Pkcs12	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/openssl-0.10.23/src/pkcs12.rs	/^impl Pkcs12 {$/;"	c
 Pkcs12Builder	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/openssl-0.10.23/src/pkcs12.rs	/^impl Pkcs12Builder {$/;"	c
@@ -3255,7 +3257,7 @@ accept	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/openssl-0.
 accept	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/openssl-0.10.23/src/ssl/mod.rs	/^    pub fn accept<S>(self, stream: S) -> Result<SslStream<S>, HandshakeError<S>>$/;"	P	implementation:Ssl
 acquire_privileges	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/time-0.1.42/src/sys.rs	/^    fn acquire_privileges() {$/;"	f	module:inner
 activate	/home/takahiro/WorkSpace/docker-ne/network-runner/src/lib.rs	/^pub mod activate;$/;"	n
-activate_network	/home/takahiro/WorkSpace/docker-ne/network-runner/src/activate.rs	/^pub fn activate_network(nodes: Nodes, args: &ArgMatches) -> Result<Nodes, String>{$/;"	f
+activate_network	/home/takahiro/WorkSpace/docker-ne/network-runner/src/activate.rs	/^pub fn activate_network(nodes: Nodes, args: &ArgMatches) -> Result<Nodes, Error>{$/;"	f
 active_session	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/openssl-0.10.23/src/ssl/test/mod.rs	/^fn active_session() {$/;"	f
 actix_web	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/askama-0.8.0/src/lib.rs	/^pub mod actix_web {$/;"	n
 adaptors	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/itertools-0.8.0/src/lib.rs	/^mod adaptors;$/;"	n
@@ -4637,7 +4639,7 @@ expecting	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_y
 expecting	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_yaml-0.8.9/src/mapping.rs	/^            fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {$/;"	P	implementation:Mapping::deserialize::Visitor
 expecting	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_yaml-0.8.9/src/number.rs	/^            fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {$/;"	P	implementation:Number::deserialize::NumberVisitor
 expecting	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_yaml-0.8.9/src/value/de.rs	/^            fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {$/;"	P	implementation:Value::deserialize::ValueVisitor
-expiration	/home/takahiro/WorkSpace/docker-ne/network-runner/src/cert.rs	/^    expiration :String,$/;"	m	struct:RouterRecord
+expiration	/home/takahiro/WorkSpace/docker-ne/network-runner/src/cert.rs	/^    expiration  :String,$/;"	m	struct:RouterRecord
 explicit_name_set	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.0/src/usage_parser.rs	/^    explicit_name_set: bool,$/;"	m	struct:UsageParser
 export	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/serde-1.0.92/src/lib.rs	/^pub mod export;$/;"	n
 export_keying_material	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/openssl-0.10.23/src/ssl/mod.rs	/^    pub fn export_keying_material($/;"	P	implementation:SslRef
@@ -5515,6 +5517,7 @@ isoywd	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/chrono-0.4
 isoywd_opt	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/chrono-0.4.7/src/offset/mod.rs	/^    fn isoywd_opt(&self, year: i32, week: u32, weekday: Weekday) -> LocalResult<Date<Self>> {$/;"	P	interface:TimeZone
 issue_credentials	/home/takahiro/WorkSpace/docker-ne/network-runner/src/cert.rs	/^pub fn issue_credentials(node_name: &String) -> (Rsa<Private>, X509) {$/;"	f
 issue_seed_sql	/home/takahiro/WorkSpace/docker-ne/network-runner/src/cert.rs	/^pub fn issue_seed_sql(cert_map: &HashMap<Node, X509>) -> String {$/;"	f
+issue_test_script	/home/takahiro/WorkSpace/docker-ne/network-runner/src/cert.rs	/^pub fn issue_test_script(nodes: &Nodes) -> String {$/;"	f
 issued	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/openssl-0.10.23/src/x509/mod.rs	/^    pub fn issued(&self, subject: &X509Ref) -> X509VerifyResult {$/;"	P	implementation:X509Ref
 issued	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/openssl-0.10.23/src/x509/tests.rs	/^fn issued() {$/;"	f
 issuer	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/openssl-0.10.23/src/x509/extension.rs	/^    issuer: Option<bool>,$/;"	m	struct:AuthorityKeyIdentifier
@@ -6077,6 +6080,7 @@ new	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_yaml-0.
 new	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_yaml-0.8.9/src/value/de.rs	/^    fn new(map: Mapping) -> Self {$/;"	P	implementation:MapDeserializer
 new	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_yaml-0.8.9/src/value/de.rs	/^    fn new(vec: Vec<Value>) -> Self {$/;"	P	implementation:SeqDeserializer
 new	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/time-0.1.42/src/lib.rs	/^    pub fn new(sec: i64, nsec: i32) -> Timespec {$/;"	P	implementation:Timespec
+new	/home/takahiro/WorkSpace/docker-ne/network-runner/src/cert.rs	/^    pub fn new(iface_num: usize) -> PingTarget {$/;"	P	implementation:PingTarget
 new	/home/takahiro/WorkSpace/docker-ne/network-runner/src/cert.rs	/^    pub fn new(router_id: String, certificate: String, public_key: String, expiration: String) -/;"	P	implementation:RouterRecord
 new	/home/takahiro/WorkSpace/docker-ne/network-runner/src/cert.rs	/^    pub fn new(router_id: String, prefix: String) -> PrefixRecord {$/;"	P	implementation:PrefixRecord
 new	/home/takahiro/WorkSpace/docker-ne/network-runner/src/node.rs	/^    pub fn new() -> Interface {$/;"	P	implementation:Interface
@@ -6562,10 +6566,10 @@ pred	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/chrono-0.4.7
 pred	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/chrono-0.4.7/src/naive/internals.rs	/^    pub fn pred(&self) -> Of {$/;"	P	implementation:Of
 pred_opt	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/chrono-0.4.7/src/date.rs	/^    pub fn pred_opt(&self) -> Option<Date<Tz>> {$/;"	P	implementation:Date
 pred_opt	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/chrono-0.4.7/src/naive/date.rs	/^    pub fn pred_opt(&self) -> Option<NaiveDate> {$/;"	P	implementation:NaiveDate
-prefix	/home/takahiro/WorkSpace/docker-ne/network-runner/src/cert.rs	/^    prefix :String,$/;"	m	struct:PrefixRecord
+prefix	/home/takahiro/WorkSpace/docker-ne/network-runner/src/cert.rs	/^    prefix      :String,$/;"	m	struct:PrefixRecord
 prefix	/home/takahiro/WorkSpace/docker-ne/network-runner/src/node.rs	/^    prefix: String,$/;"	m	struct:Interface
 prefix	/home/takahiro/WorkSpace/docker-ne/network-runner/src/node.rs	/^    pub fn prefix(&self) -> &String {$/;"	P	implementation:Interface
-prefixes	/home/takahiro/WorkSpace/docker-ne/network-runner/src/cert.rs	/^    prefixes :Vec<PrefixRecord>,$/;"	m	struct:InsertData
+prefixes	/home/takahiro/WorkSpace/docker-ne/network-runner/src/cert.rs	/^    prefixes    :Vec<PrefixRecord>,$/;"	m	struct:InsertData
 prelude	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/chrono-0.4.7/src/lib.rs	/^pub mod prelude {$/;"	n
 prev	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.0/src/usage_parser.rs	/^    prev: UsageToken,$/;"	m	struct:UsageParser
 primitive_deserializer	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/serde-1.0.92/src/de/value.rs	/^macro_rules! primitive_deserializer {$/;"	M
@@ -6613,7 +6617,7 @@ public_eq	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/openssl
 public_key	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/openssl-0.10.23/src/ec.rs	/^    pub fn public_key(&self) -> &EcPointRef {$/;"	f
 public_key	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/openssl-0.10.23/src/x509/mod.rs	/^    pub fn public_key(&self) -> Result<PKey<Public>, ErrorStack> {$/;"	P	implementation:X509Ref
 public_key	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/openssl-0.10.23/src/x509/mod.rs	/^    pub fn public_key(&self) -> Result<PKey<Public>, ErrorStack> {$/;"	P	implementation:X509ReqRef
-public_key	/home/takahiro/WorkSpace/docker-ne/network-runner/src/cert.rs	/^    public_key :String,$/;"	m	struct:RouterRecord
+public_key	/home/takahiro/WorkSpace/docker-ne/network-runner/src/cert.rs	/^    public_key  :String,$/;"	m	struct:RouterRecord
 push	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/openssl-0.10.23/src/stack.rs	/^    pub fn push(&mut self, data: T) -> Result<(), ErrorStack> {$/;"	P	implementation:StackRef
 push_next_group	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/itertools-0.8.0/src/groupbylazy.rs	/^    fn push_next_group(&mut self, group: Vec<I::Item>) {$/;"	f
 put	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/openssl-0.10.23/src/error.rs	/^    pub fn put(&self) {$/;"	P	implementation:Error
@@ -6759,11 +6763,11 @@ round_subsecs	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/chr
 round_subsecs	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/chrono-0.4.7/src/round.rs	/^    fn round_subsecs(self, digits: u16) -> T {$/;"	f
 rounds	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/openssl-sys-0.9.47/src/aes.rs	/^    rounds: c_int,$/;"	m	struct:AES_KEY
 roundtrip	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/openssl-0.10.23/src/asn1.rs	/^        fn roundtrip(bn: BigNum) {$/;"	f	function:tests::bn_cvt
-router_id	/home/takahiro/WorkSpace/docker-ne/network-runner/src/cert.rs	/^    router_id :String,$/;"	m	struct:PrefixRecord
-router_id	/home/takahiro/WorkSpace/docker-ne/network-runner/src/cert.rs	/^    router_id :String,$/;"	m	struct:RouterRecord
+router_id	/home/takahiro/WorkSpace/docker-ne/network-runner/src/cert.rs	/^    router_id   :String,$/;"	m	struct:PrefixRecord
+router_id	/home/takahiro/WorkSpace/docker-ne/network-runner/src/cert.rs	/^    router_id   :String,$/;"	m	struct:RouterRecord
 router_id	/home/takahiro/WorkSpace/docker-ne/network-runner/src/node.rs	/^    pub fn router_id(&self) -> &String {$/;"	P	implementation:Node
 router_id	/home/takahiro/WorkSpace/docker-ne/network-runner/src/node.rs	/^    router_id: String,$/;"	m	struct:Node
-routers	/home/takahiro/WorkSpace/docker-ne/network-runner/src/cert.rs	/^    routers :Vec<RouterRecord>,$/;"	m	struct:InsertData
+routers	/home/takahiro/WorkSpace/docker-ne/network-runner/src/cert.rs	/^    routers     :Vec<RouterRecord>,$/;"	m	struct:InsertData
 rsa	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/openssl-0.10.23/src/lib.rs	/^pub mod rsa;$/;"	n
 rsa	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/openssl-0.10.23/src/pkey.rs	/^    pub fn rsa(&self) -> Result<Rsa<T>, ErrorStack> {$/;"	P	implementation:PKeyRef
 rsa	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/openssl-0.10.23/src/rsa.rs	/^    rsa: Rsa<Private>,$/;"	m	struct:RsaPrivateKeyBuilder
@@ -7420,6 +7424,7 @@ str	/home/takahiro/WorkSpace/docker-ne/network-runner/src/consts.rs	/^pub const 
 str	/home/takahiro/WorkSpace/docker-ne/network-runner/src/consts.rs	/^pub const OWN_PKEY: &'static str = "privkey.pem";$/;"	v
 str	/home/takahiro/WorkSpace/docker-ne/network-runner/src/consts.rs	/^pub const SEED_DATA: &'static str = "insert_seed.sql";$/;"	v
 str	/home/takahiro/WorkSpace/docker-ne/network-runner/src/consts.rs	/^pub const SQLITE_DATETIME_FORMAT: &'static str = "%Y-%m-%d %T";$/;"	v
+str	/home/takahiro/WorkSpace/docker-ne/network-runner/src/consts.rs	/^pub const TEST_PING_SCRIPT: &'static str = "test_ping";$/;"	v
 str	/home/takahiro/WorkSpace/docker-ne/network-runner/src/consts.rs	/^pub const TMP_DIR: &'static str = "\/tmp\/network_runner";$/;"	v
 str	/home/takahiro/WorkSpace/docker-ne/network-runner/src/consts.rs	/^pub const ZEBRA_CONF: &'static str = "zebra.conf";$/;"	v
 str_width	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.0/src/app/help.rs	/^fn str_width(s: &str) -> usize {$/;"	f
@@ -7548,6 +7553,7 @@ takes_value	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-
 takes_value	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.0/src/args/arg_builder/flag.rs	/^    fn takes_value(&self) -> bool { false }$/;"	P	implementation:FlagBuilder
 takes_value	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.0/src/args/arg_builder/option.rs	/^    fn takes_value(&self) -> bool { true }$/;"	P	implementation:OptBuilder
 takes_value	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.0/src/args/arg_builder/positional.rs	/^    fn takes_value(&self) -> bool { true }$/;"	P	implementation:PosBuilder
+targets	/home/takahiro/WorkSpace/docker-ne/network-runner/src/cert.rs	/^    targets :Vec<(String, String)> \/\/ (name, prefix)$/;"	m	struct:PingTarget
 tbs_certificate	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/x509-parser-0.4.2/src/x509.rs	/^    pub tbs_certificate: TbsCertificate<'a>,$/;"	m	struct:X509Certificate
 tee	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/itertools-0.8.0/src/lib.rs	/^    fn tee(self) -> (Tee<Self>, Tee<Self>)$/;"	P	interface:Itertools
 tee	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/itertools-0.8.0/src/lib.rs	/^mod tee;$/;"	n
@@ -8650,7 +8656,7 @@ write_before_after_help	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db
 write_bin_name	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.0/src/app/help.rs	/^    fn write_bin_name(&mut self, parser: &Parser) -> io::Result<()> {$/;"	P	implementation:Help
 write_default_help	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.0/src/app/help.rs	/^    pub fn write_default_help(&mut self, parser: &Parser) -> ClapResult<()> {$/;"	P	implementation:Help
 write_early_data	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/openssl-0.10.23/src/ssl/mod.rs	/^    pub fn write_early_data(&mut self, buf: &[u8]) -> Result<usize, Error> {$/;"	f
-write_file	/home/takahiro/WorkSpace/docker-ne/network-runner/src/utils.rs	/^pub fn write_file(filename: String, contents: String) {$/;"	f
+write_file	/home/takahiro/WorkSpace/docker-ne/network-runner/src/utils.rs	/^pub fn write_file(filename: String, contents: String, permissions: u32) -> Result<(), Error> {$/;"	f
 write_help	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.0/src/app/help.rs	/^    pub fn write_help(&mut self, parser: &Parser) -> ClapResult<()> {$/;"	P	implementation:Help
 write_help	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.0/src/app/mod.rs	/^    pub fn write_help<W: Write>(&self, w: &mut W) -> ClapResult<()> {$/;"	P	implementation:App
 write_help	/home/takahiro/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.0/src/app/parser.rs	/^    pub fn write_help<W: Write>(&self, w: &mut W) -> ClapResult<()> {$/;"	f

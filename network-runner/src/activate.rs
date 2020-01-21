@@ -1,6 +1,7 @@
 extern crate askama;
 extern crate openssl;
 
+use std::io::{ Error, ErrorKind };
 use std::fs;
 use std::process::Command;
 use std::collections::HashMap;
@@ -17,20 +18,16 @@ use crate::consts::*;
 use crate::utils::*;
 use crate::cert::*;
 
-pub fn activate_network(nodes: Nodes, args: &ArgMatches) -> Result<Nodes, String>{
+pub fn activate_network(nodes: Nodes, args: &ArgMatches) -> Result<Nodes, Error>{
 
     let fluent_host = args.value_of("fhost").unwrap_or(DEFAULT_FLUENTD_HOST);
     let fluent_port = args.value_of("fport").unwrap_or(DEFAULT_FLUENTD_PORT);
     let network_name = Path::new( args.value_of("file").unwrap_or(DEFAULT_NETWORK_NAME) ).file_stem().unwrap().to_str().unwrap();
 
     // remove all conf file
-    match fs::remove_dir_all( TMP_DIR ) {
-        Ok(_) => (),
-        Err(_) => (),
-    };
+    fs::remove_dir_all(TMP_DIR).unwrap_or(());
 
     // store CA's information
-    //let mut ca_node = Node::new();
     let mut ca_cert = String::from("");
 
     // store all certs
@@ -46,27 +43,25 @@ pub fn activate_network(nodes: Nodes, args: &ArgMatches) -> Result<Nodes, String
 
         // create config files for each node
         let conf_str = match n.render() {
-            Ok(result) => result,
-            Err(msg) => return Err(msg.to_string()),
+            Ok(msg) => msg,
+            Err(e) => return Err(Error::new(ErrorKind::Other, e)),
         };
 
-        write_file(
-            get_filepath(n.name(), FileType::Conf, OSPF6D_CONF),
-            conf_str
-        );
+        write_file( get_filepath(n.name(), FileType::Conf, OSPF6D_CONF), conf_str, 0o744 )?;
 
         write_file( 
             get_filepath(n.name(), FileType::Conf, ZEBRA_CONF),
             format!(
                 "hostname {}\npassword zebra\nenable password zebra\nlog stdout",
-                n.name()
-           )
-        );
+                n.name(),
+            ),
+            0o744
+        )?;
 
         // create private key and certificate for each node
         let (privkey, cert) = issue_credentials(&n.name());
 
-        // save credentials to each mout point
+        // save private key and certificate to each mout point
         fs::write(
             &get_filepath(n.name(), FileType::Cert, OWN_PKEY),
             &privkey.private_key_to_pem().unwrap()
@@ -83,23 +78,22 @@ pub fn activate_network(nodes: Nodes, args: &ArgMatches) -> Result<Nodes, String
         // store CA's data
         if n.is_ca() {
             ca_cert = get_filepath(&n.name(), FileType::Cert, OWN_CERT);
-            //ca_node = n.clone();
         };
 
     };
 
-    // save CA's certificate to all nodes
     for n in &nodes {
+        // save CA's certificate to all nodes
         fs::copy(
             &ca_cert,
             &get_filepath(&n.name(), FileType::Cert, CA_CERT)
         ).unwrap();
 
         // issue SQL for inserting seed data
-        write_file(
-            get_filepath(&n.name(), FileType::SQL, SEED_DATA),
-            issue_seed_sql(&cert_store)
-        );
+        write_file( get_filepath(&n.name(), FileType::SQL, SEED_DATA), issue_seed_sql(&cert_store), 0o777 )?;
+
+        // issue Test Script for inserting seed data
+        write_file( get_filepath(&n.name(), FileType::ExecBin, TEST_PING_SCRIPT), issue_test_script(&nodes), 0o777 )?;
     };
 
 

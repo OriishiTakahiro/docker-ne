@@ -14,7 +14,7 @@ parser.add_argument("-f", "--format", type=str, default="normal", help="Display 
 parser.add_argument("-d", "--dir", type=str, default="/tmp/log/fluentd", help="Directory path of log files.")
 args = parser.parse_args()
 
-LOG_PATH_REGEX = r"(node[0-9]+)_([0-9]+).log"
+LOG_PATH_REGEX = r"(node[0-9]+)\.[0-9]+_[0-9]+.log"
 
 # get datetime from log message
 def msg2datetime(msg):
@@ -43,6 +43,16 @@ def get_min(records, key):
             min = v[key]
     return min
 
+def get_max(records, key):
+    max = None
+    for v in records.values():
+        if max is None:
+            max = v[key]
+            continue
+        if v[key] > max:
+            max = v[key]
+    return max
+
 nodes = {}
 log_files = os.listdir(path=args.dir)
 
@@ -62,18 +72,24 @@ nodes_stats = {}
 # read all files and aggregate records
 for (name, records) in nodes.items():
 
+    # get start time
     start_records = list(filter(lambda e: "starts" in e["log"], records))
     started_at = msg2datetime( start_records[0]["log"] )
 
+    # get records by regexp
     erouter_records = list(filter(lambda e: "OSPF6: lsdb_hook_add: E-Router LSA" in e["log"], records))
-
     intra_prefix_records = list(filter(lambda e: "OSPF6: lsdb_hook_add: Intra-Area-Prefix LSA" in e["log"], records))
+
+    erouter_last_time = last_time(erouter_records)
+    intra_last_time = last_time(intra_prefix_records)
 
     nodes_stats[name] = {
         "erouter_num": len(erouter_records),
-        "erouter_time_sec": (last_time(erouter_records) - started_at).total_seconds(),
+        # if non E-Router LSA are found, erouter_last_time is None
+        "erouter_time_sec": (erouter_last_time - started_at).total_seconds() if erouter_last_time is not None else None,
         "intra_prefix_num": len(intra_prefix_records),
-        "intra_prefix_time_sec": (last_time(intra_prefix_records) - started_at).total_seconds(),
+        # if non Intra-Area-Prefix LSA are found, intra_last_time is None
+        "intra_prefix_time_sec": (intra_last_time - started_at).total_seconds() if intra_last_time is not None else None,
     }
 
 # display as CSV format
@@ -95,7 +111,7 @@ if args.format == "csv":
 
 # display as normal format
 if args.format == "normal":
-    for k, v in nodes_stats.items():
+    for k, v in sorted(nodes_stats.items(), key=lambda x: int(x[0][4:])):
         msg = """
 About {name}
 E-Router LSA:
@@ -115,8 +131,15 @@ Intra-Area-Prefix LSA:
         print(msg)
     print("""
 Minimum (Number of LSA):
-    E-Router LSA            : {erouter}
-    Intra-Area-Prefix LSA   : {intra}
-    """.format( erouter=get_min(nodes_stats, "erouter_num"), intra=get_min(nodes_stats, "intra_prefix_num") )
-    )
+    E-Router LSA            : {min_erouter}
+    Intra-Area-Prefix LSA   : {min_intra}
+Maximam (Number of LSA):
+    E-Router LSA            : {max_erouter}
+    Intra-Area-Prefix LSA   : {max_intra}
+    """.format(
+        min_erouter=get_min(nodes_stats, "erouter_num"),
+        min_intra=get_min(nodes_stats, "intra_prefix_num"),
+        max_erouter=get_max(nodes_stats, "erouter_num"),
+        max_intra=get_max(nodes_stats, "intra_prefix_num")
+    ))
     sys.exit(0)

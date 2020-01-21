@@ -44,10 +44,10 @@ pub fn issue_credentials(node_name: &String) -> (Rsa<Private>, X509) {
 
 #[derive(Clone, Debug)]
 struct RouterRecord {
-    router_id :String,
+    router_id   :String,
     certificate :String,
-    public_key :String,
-    expiration :String,
+    public_key  :String,
+    expiration  :String,
 }
 impl RouterRecord {
     pub fn new(router_id: String, certificate: String, public_key: String, expiration: String) -> RouterRecord {
@@ -61,8 +61,8 @@ impl RouterRecord {
 }
 #[derive(Clone, Debug)]
 struct PrefixRecord {
-    router_id :String,
-    prefix :String,
+    router_id   :String,
+    prefix      :String,
 } 
 impl PrefixRecord {
     pub fn new(router_id: String, prefix: String) -> PrefixRecord {
@@ -72,11 +72,12 @@ impl PrefixRecord {
         }
     }
 }
+
 #[derive(Template, Clone, Debug)]
 #[template(path="insert_seed", print="none")]
 struct InsertData {
-    routers :Vec<RouterRecord>,
-    prefixes :Vec<PrefixRecord>,
+    routers     :Vec<RouterRecord>,
+    prefixes    :Vec<PrefixRecord>,
 }
 
 pub fn issue_seed_sql(cert_map: &HashMap<Node, X509>) -> String {
@@ -112,5 +113,28 @@ pub fn issue_seed_sql(cert_map: &HashMap<Node, X509>) -> String {
         }
     }
 
+    data.render().unwrap()
+}
+
+#[derive(Template, Clone, Debug)]
+#[template(path="test_ping", print="none")]
+struct PingTarget {
+    targets :Vec<(String, String)> // (name, prefix)
+}
+impl PingTarget {
+    pub fn new(iface_num: usize) -> PingTarget {
+        PingTarget {
+            targets: Vec::with_capacity(iface_num),
+        }
+    }
+}
+
+pub fn issue_test_script(nodes: &Nodes) -> String {
+    let mut data = PingTarget::new( nodes.iter().fold(0, |sum, n| sum + n.interfaces().len()) );
+    for n in nodes {
+        for iface in n.interfaces() {
+            data.targets.push( (n.name().to_string(), iface.prefix().to_string()) );
+        }
+    }
     data.render().unwrap()
 }
