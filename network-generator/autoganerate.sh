@@ -16,7 +16,7 @@ NODE_N_LIST=(
   "144"
   "160"
 )
-IMAGES="quagga-original,quaggga-pki"
+IMAGES="quagga-original,quagga-pki"
 YAML_DIR="${PWD}/networks"
 
 for TYPE in ${GRAPH_TYPES[@]}; do
