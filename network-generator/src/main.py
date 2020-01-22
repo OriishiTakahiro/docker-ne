@@ -3,6 +3,7 @@
 import sys
 import argparse
 import networkx as nx
+import numpy as np
 import matplotlib.pyplot as plt
 from random import randint
 from yaml import dump
@@ -127,8 +128,17 @@ for image in args.image.split(","):
 # diam(G): {diam}
 # Average shortest path length              : {aspl}
 # Average shortest path length (from CA)    : {aspl_ca}
+# Average Degree                            : {average_degree}
 {yaml}
-    """.format( type=args.graph_type, nodes=args.nodes, diam=diam, aspl=aspl, aspl_ca=aspl_ca, yaml=dump(nodes_list) )
+    """.format( 
+        type             = args.graph_type,
+        nodes           = args.nodes,
+        diam            = diam,
+        aspl            = aspl,
+        aspl_ca         = aspl_ca,
+        average_degree  = np.average( [v for k,v in graph.degree()] ),
+        yaml            = dump(nodes_list)
+    )
 
     # save YAML file
     with open( "{dir}/{type}-{image}-{nodes}.yaml".format(dir=ARTIFACT_PATH, type=args.graph_type, image=image, nodes=args.nodes)  , "w") as f:
@@ -137,3 +147,6 @@ for image in args.image.split(","):
     # save network graph
     nx.draw_networkx(graph)
     plt.savefig( "{dir}/{type}-{image}-{nodes}.svg".format(dir=ARTIFACT_PATH, type=args.graph_type, image=image, nodes=args.nodes), format="svg" )
+
+# export graph in yaml format
+nx.write_yaml(graph, "{dir}/{type}-{nodes}.yaml".format(dir=ARTIFACT_PATH, type=args.graph_type, nodes=args.nodes) )

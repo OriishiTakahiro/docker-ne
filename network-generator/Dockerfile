@@ -4,6 +4,7 @@ RUN apt update
 
 RUN pip install \
     networkx \
+    numpy \
     matplotlib \
     pyyaml 
 RUN mkdir /root/artifacts
