@@ -7,6 +7,7 @@ import json
 import datetime
 import argparse
 import csv
+import tzlocal
 
 # check parameters
 parser = argparse.ArgumentParser(description="Show log summary.")
@@ -18,7 +19,7 @@ LOG_PATH_REGEX = r"(node[0-9]+)\.[0-9]+_[0-9]+.log"
 
 # get datetime from log message
 def msg2datetime(msg):
-    return datetime.datetime( int(msg[0:4]), int(msg[5:7]), int(msg[8:10]), int(msg[11:13]), int(msg[14:16]), int(msg[17:20]) )
+    return datetime.datetime( int(msg[0:4]), int(msg[5:7]), int(msg[8:10]), int(msg[11:13]), int(msg[14:16]), int(msg[17:20]), tzinfo=datetime.timezone.utc )
 
 # get last time of records
 def last_time(records):
@@ -84,12 +85,16 @@ for (name, records) in nodes.items():
     intra_last_time = last_time(intra_prefix_records)
 
     nodes_stats[name] = {
-        "erouter_num": len(erouter_records),
+        ### E-Router LSA ###
+        "erouter_num"               : len(erouter_records),
         # if non E-Router LSA are found, erouter_last_time is None
-        "erouter_time_sec": (erouter_last_time - started_at).total_seconds() if erouter_last_time is not None else None,
-        "intra_prefix_num": len(intra_prefix_records),
+        "erouter_time_sec"          : (erouter_last_time - started_at).total_seconds() if erouter_last_time is not None else None,
+        "erouter_updated_at"        : erouter_last_time if erouter_last_time is not None else datetime.datetime(2020, 1, 1, tzinfo=datetime.timezone.utc),
+        ### Intra-Area-Prefix LSA ###
+        "intra_prefix_num"          : len(intra_prefix_records),
         # if non Intra-Area-Prefix LSA are found, intra_last_time is None
-        "intra_prefix_time_sec": (intra_last_time - started_at).total_seconds() if intra_last_time is not None else None,
+        "intra_prefix_time_sec"     : (intra_last_time - started_at).total_seconds() if intra_last_time is not None else None,
+        "intra_prefix_updated_at"   : intra_last_time if intra_last_time is not None else datetime.datetime(2020, 1, 1, tzinfo=datetime.timezone.utc),
     }
 
 # display as CSV format
@@ -136,10 +141,15 @@ Minimum (Number of LSA):
 Maximam (Number of LSA):
     E-Router LSA            : {max_erouter}
     Intra-Area-Prefix LSA   : {max_intra}
+Last Updated Time (sec):
+    E-Router LSA            : {last_erouter}
+    Intra-Area-Prefix LSA   : {last_intra}
     """.format(
-        min_erouter=get_min(nodes_stats, "erouter_num"),
-        min_intra=get_min(nodes_stats, "intra_prefix_num"),
-        max_erouter=get_max(nodes_stats, "erouter_num"),
-        max_intra=get_max(nodes_stats, "intra_prefix_num")
+        min_erouter = get_min(nodes_stats, "erouter_num"),
+        min_intra   = get_min(nodes_stats, "intra_prefix_num"),
+        max_erouter = get_max(nodes_stats, "erouter_num"),
+        max_intra   = get_max(nodes_stats, "intra_prefix_num"),
+        last_erouter= get_max(nodes_stats, "erouter_updated_at").astimezone(tzlocal.get_localzone()),
+        last_intra  = get_max(nodes_stats, "intra_prefix_updated_at").astimezone(tzlocal.get_localzone())
     ))
-    sys.exit(0)
+sys.exit(0)
